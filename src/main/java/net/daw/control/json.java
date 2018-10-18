@@ -66,10 +66,9 @@ public class json extends HttpServlet {
                     }
                     
                      if (strOp.equalsIgnoreCase("getCount")) {
-
                         TipousuarioService oService = new TipousuarioService(request);
                         try {
-                            ReplyBean oReplyBean = oService.get();
+                            ReplyBean oReplyBean = oService.getCount();
                             strJson = "{\"status\":" + oReplyBean.getStatus() + ",\"message\":\"" + oReplyBean.getJson()
                                     + "\"}";
 
