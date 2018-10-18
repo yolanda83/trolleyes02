@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import net.daw.bean.TipousuarioBean;
 
+//        http://localhost:8081/trolleyes/json?op=getCount&ob=tipousuario
 public class TipousuarioDao {
 
     Connection oConnection;
@@ -43,9 +44,34 @@ public class TipousuarioDao {
                 oPreparedStatement.close();
             }
         }
-
         return oTipousuarioBean;
+    }
 
+    public int getCount() throws Exception {
+        String strSQL = "SELECT COUNT(id) FROM " + ob;
+        int contador = 0;
+
+        ResultSet oResultSet = null;
+        PreparedStatement oPreparedStatement = null;
+
+        try {
+            oPreparedStatement = oConnection.prepareStatement(strSQL);
+            oResultSet = oPreparedStatement.executeQuery();
+//            if (oResultSet.next()) {
+                contador = oResultSet.getInt(1);
+//            }
+
+        } catch (SQLException e) {
+            throw new Exception("Error en Dao getCount de tipousuario", e);
+        } finally {
+            if (oResultSet != null) {
+                oResultSet.close();
+            }
+            if (oPreparedStatement != null) {
+                oPreparedStatement.close();
+            }
+        }
+        return contador;
     }
 
     public boolean remove(int id) throws Exception {
@@ -60,9 +86,9 @@ public class TipousuarioDao {
             estado = true;
 
         } catch (SQLException e) {
-            throw new Exception("Error en Dao get de tipousuario", e);
+            throw new Exception("Error en Dao remove de tipousuario", e);
         } finally {
-   
+
             if (oPreparedStatement != null) {
                 oPreparedStatement.close();
             }
