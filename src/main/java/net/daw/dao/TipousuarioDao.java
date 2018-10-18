@@ -69,7 +69,5 @@ public class TipousuarioDao {
         }
 
         return estado;
-
     }
-
 }
