@@ -63,6 +63,8 @@ public class TipousuarioDao {
             oResultSet = oPreparedStatement.executeQuery();
             if (oResultSet.next()) {
                 contador = oResultSet.getInt(1);
+            } else {
+                contador = 0;
             }
         } catch (SQLException e) {
             throw new Exception("Error en Dao getCount de tipousuario", e);
